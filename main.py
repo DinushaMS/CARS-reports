@@ -3,7 +3,7 @@ import os
 from analyse import createFigrue, createNotes
 from datetime import date
 
-SMP = "KTP"
+SMP = "STO"
 Author = "Dinusha Senarathna"
 pdf = FPDF(format="letter")
 pdf.add_page()
