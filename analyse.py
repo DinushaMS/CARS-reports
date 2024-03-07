@@ -2,6 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import scienceplots
 import os
+import numpy as np
 
 plt.style.use('science')
 
@@ -44,8 +45,23 @@ def createNotes(file_path):
 
 
 if __name__ == '__main__':
-    file_path = "D:\\Academic\\URI\\Lab\\experimental_data\\2022\\CARS\\Jul_12\\BTS_1.dat"
+    file_path = "D:\\Academic\\URI\\Lab\\experimental_data\\2022\\CARS\\Jul_12\\BTS_2.dat"
     dir_path,file = os.path.split(file_path)
+    spectra_file = os.path.join(dir_path,f"{file[:-4]}_Spectra.dat")
+    data = pd.read_csv(spectra_file, delimiter='\t')
+    td = data.iloc[:,0].to_numpy()
+    att = data.iloc[:,1].to_numpy()
+    spectra =  data.iloc[:,2:].to_numpy()
+    r=50
+    #X,Y = np.meshgrid(td,range(np.shape(spectra)[1]))
+    plt.figure(figsize=(15,5))
+    plt.contourf(range(np.shape(spectra)[1]),td[50:100],np.log(spectra[50:100,:]*att[50:100, np.newaxis]))
+    plt.colorbar()
+    plt.xlabel("Wavelength (nm)")
+    plt.ylabel("delay (fs)")
+    plt.show()
+    plt.close()
+    #print(spectra[50:100,:]*att[50:100, np.newaxis])
     #print(os.path.join(dir_path,f"{file[:-10]}.dat"))
     #print(dir_path.split("\\")[-1]+"_"+file.split('.')[0])
     #createNotes(file_path)
