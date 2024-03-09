@@ -1,3 +1,4 @@
 #Ignore all .JPEG .PDF files
 *.JPEG
 *.pdf
+test.py
